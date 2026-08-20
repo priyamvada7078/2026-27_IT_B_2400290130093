@@ -30,9 +30,9 @@ Develop a Weather-Based Crop Advisory System using Software Engineering principl
 ### Project Team
 | Team Member | Role |
 |---|---|
-| Member A | Identity, Frontend Shell & Farmer Profile |
-| Member B | Weather Ingestion & Advisory Engine |
-| Member C | Alerts, Admin Panel & Cloud Ops |
+| Priyamvada | Identity, Frontend Shell & Farmer Profile |
+| Ishant | Weather Ingestion & Advisory Engine |
+| Naitik | Alerts, Admin Panel & Cloud Ops |
 
 ### Steps Performed
 
