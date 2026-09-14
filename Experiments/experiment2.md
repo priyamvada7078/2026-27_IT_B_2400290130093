@@ -1,159 +1,118 @@
-# Experiment 2
+# Experiment 2 — Problem Identification and Feasibility: Software Design Principles
 
-## Problem Identification and Feasibility: Software Design Principles
+## Aim
 
-### Aim
-
-To identify the problem addressed by the ATM System and study its objectives, scope, and technical and operational feasibility.
+To identify the problem addressed by the selected software project and prepare its problem statement, objectives, scope, and technical and operational feasibility analysis.
 
 ---
 
 ## Objectives
 
-- To identify the real-world problem addressed by the ATM System.
-- To prepare a clear problem statement.
-- To define the objectives and scope of the system.
-- To check whether the system is technically feasible.
-- To check whether the system is practical for users and banks.
-- To understand the overall feasibility of the proposed solution.
+- Identify the real-world problem addressed by the software project.
+- Prepare a clear problem statement.
+- Define project objectives and scope.
+- Perform technical and operational feasibility analysis.
+- Evaluate the viability of the proposed solution.
 
 ---
 
 ## Introduction
 
-Problem identification is an important first step in software development. Before building a system, it is necessary to understand the problem, the users who will use the system, and the features that are actually required.
-
-A feasibility study helps us decide whether the proposed system can be developed using the available technology, resources, and skills. It also helps us understand whether the system will be useful and easy to operate.
-
-In this experiment, an **ATM System** is selected to study the problem, objectives, scope, and feasibility of the proposed software.
+Problem identification is the first step in software engineering. A well-defined problem statement and feasibility study ensure that the proposed software solution is practical, achievable, and aligned with stakeholder requirements before development begins.
 
 ---
 
 ## Selected Project
 
-**Project Name:** ATM System  
-**Domain:** Banking and Financial Services
-
----
-
-## Problem Identification
-
-Customers often need to visit a bank branch for simple tasks such as withdrawing cash, checking their balance, or getting a mini statement. This can result in long queues, waiting time, and dependency on bank working hours.
-
-An ATM can solve this problem by providing basic banking services through a self-service system. Customers can use an ATM to perform common transactions without directly depending on bank employees.
+| Field              | Details                               |
+|--------------------|---------------------------------------|
+| **Project Title**  | Weather-Based Crop Advisory System    |
+| **Domain**         | Agriculture / AgriTech                |
 
 ---
 
 ## Problem Statement
 
-Traditional banking requires customers to visit bank branches for routine transactions such as cash withdrawal and balance enquiry. This may lead to long queues, delays, and limited access outside banking hours.
-
-The proposed **ATM System** provides a secure and convenient way for customers to perform basic banking transactions such as authentication, balance enquiry, cash withdrawal, cash deposit, fund transfer, and receipt generation.
+Farmers in rural and semi-urban areas often lack access to timely, localised weather information, leading to poor decisions around irrigation, sowing, and crop protection. Unpredictable weather events such as frost, heat waves, and unseasonal rainfall cause significant crop losses that could be avoided with proper advance advisory. A **Weather-Based Crop Advisory System** addresses this by providing farmers with real-time, weather-driven advisories — including irrigation timing, sowing windows, and frost/heat/spray warnings — delivered through a web dashboard and SMS alerts, built on a fully serverless AWS cloud architecture.
 
 ---
 
 ## Project Objectives
 
-The main objectives of the ATM System are:
-
-1. To provide secure customer authentication using an ATM card and PIN.
-2. To allow customers to check their account balance.
-3. To provide cash withdrawal and cash deposit facilities.
-4. To support basic fund transfer operations.
-5. To provide mini statements of recent transactions.
-6. To generate receipts for completed transactions.
-7. To reduce customer waiting time.
-8. To provide convenient access to basic banking services.
-9. To maintain security and accuracy during transactions.
+- Provide farmers with localised, real-time weather-driven crop advisories.
+- Deliver actionable alerts (irrigation timing, sowing window, frost/heat/spray warnings) via web dashboard and SMS.
+- Implement secure farmer authentication and profile management.
+- Automate weather data ingestion and advisory generation using cloud services.
+- Build a scalable, serverless architecture on AWS (Cognito, API Gateway, Lambda, DynamoDB, EventBridge, SNS, S3, CloudFront).
+- Provide an admin panel for system monitoring and management.
 
 ---
 
 ## Project Scope
 
-The scope defines the features that will be handled by the ATM System.
+### In Scope
+- Farmer registration, authentication, and profile management (AWS Cognito)
+- Real-time weather data ingestion and processing (Lambda, EventBridge)
+- Advisory engine for irrigation timing, sowing windows, and weather warnings
+- SMS alert delivery to farmers (AWS SNS)
+- Web dashboard for farmers to view advisories (S3, CloudFront)
+- Admin panel for monitoring and cloud operations
+- Serverless backend services (API Gateway, Lambda, DynamoDB)
 
-### Included in Scope
-
-- ATM card and PIN authentication
-- PIN validation
-- Balance enquiry
-- Cash withdrawal
-- Cash deposit
-- Fund transfer
-- Mini statement
-- Receipt generation
-- Communication with the central banking system
-- Basic ATM monitoring and maintenance
-
-### Outside the Scope
-
-The following features are not included in this project:
-
-- Opening a new bank account
-- Loan processing
-- Internet banking
-- Investment management
-- Credit card application
-- Insurance services
+### Out of Scope
+- Offline or on-premise deployment
+- Crop disease detection or image-based analysis
+- Market price advisory or supply chain management
+- Direct hardware/IoT sensor integration
 
 ---
 
-## Technical Feasibility
+## Project Team
 
-Technical feasibility checks whether the required technology, hardware, software, and security features are available to develop the system.
-
-| Factor | Status | Reason |
-|---|---|---|
-| Technology | Feasible | Java/Python and SQL can be used to develop the system. |
-| Hardware | Feasible | A standard computer is sufficient for developing and testing a simulated ATM. |
-| Database | Feasible | SQL can be used to store account and transaction details. |
-| Software Tools | Feasible | IDEs, Git, GitHub and UML tools are easily available. |
-| Security | Feasible | PIN authentication and encrypted communication can be implemented. |
-| Scalability | Feasible | The system can be extended with additional features later. |
-
-### Technical Feasibility Conclusion
-
-The ATM System is technically feasible because the required programming languages, database systems, development tools, and hardware are easily available. The system can also be developed and tested using a simulated ATM environment.
+| Team Member  | Role                                        |
+|--------------|---------------------------------------------|
+| Priyamvada   | Identity, Frontend Shell & Farmer Profile   |
+| Ishant       | Weather Ingestion & Advisory Engine         |
+| Naitik       | Alerts, Admin Panel & Cloud Ops             |
 
 ---
 
-## Operational Feasibility
+## Technical Feasibility Analysis
 
-Operational feasibility checks whether the proposed system will be useful, easy to operate, and acceptable to its users.
+| Factor         | Assessment  | Remarks                                                                         |
+|----------------|-------------|---------------------------------------------------------------------------------|
+| Technology     | ✅ Feasible  | AWS serverless stack (Lambda, DynamoDB, SNS, Cognito) is production-ready       |
+| Hardware       | ✅ Feasible  | No dedicated hardware required; cloud infrastructure handles all compute        |
+| Software Tools | ✅ Feasible  | VS Code, Git, GitHub, AWS Console, and open weather APIs are freely available   |
+| Security       | ✅ Feasible  | AWS Cognito handles authentication; API Gateway enforces access control         |
+| Scalability    | ✅ Feasible  | Serverless architecture auto-scales based on demand with no manual intervention |
 
-| Factor | Assessment | Reason |
-|---|---|---|
-| User Acceptance | High | ATM usage is already familiar to most customers. |
-| Ease of Use | High | The system can use a simple menu-based interface. |
-| Availability | High | Basic services can be provided throughout the day. |
-| Maintenance | High | A modular system is easier to maintain and update. |
-| Reliability | High | Automated processing can reduce manual errors. |
-| Business Benefit | High | It reduces branch workload and saves customer time. |
+---
 
-### Operational Feasibility Conclusion
+## Operational Feasibility Analysis
 
-The ATM System is operationally feasible because customers can use it with minimal training. It provides quick access to basic banking services and reduces the workload on bank employees.
+| Factor           | Assessment | Remarks                                                              |
+|------------------|------------|----------------------------------------------------------------------|
+| User Acceptance  | ⭐ High     | SMS alerts and simple dashboard cater to low-tech farmer users       |
+| Ease of Use      | ⭐ High     | Minimal training required; advisories delivered directly via SMS     |
+| Availability     | ⭐ High     | Cloud-hosted, serverless system ensures 24×7 uptime                  |
+| Maintainability  | ⭐ High     | Modular microservices (farmer, weather, advisory, alert) ease updates |
+| Business Benefit | ⭐ High     | Reduces crop losses, improves farm productivity and farmer income     |
 
 ---
 
 ## Analysis
 
-The feasibility study shows that the proposed ATM System is both **technically and operationally feasible**.
-
-The required technologies and development tools are available, and the system can be developed using a standard computer for simulation. From an operational point of view, customers are already familiar with ATM-based services, so the system would be easy to understand and use.
-
-The system can save customer time, reduce queues, and improve the efficiency of routine banking transactions.
+The feasibility study confirms that the Weather-Based Crop Advisory System is both technically and operationally viable. AWS serverless services eliminate infrastructure overhead, open weather APIs provide real-time data at low cost, and the SMS-based delivery model ensures accessibility even for farmers with basic mobile phones. The modular architecture allows independent development and future scaling.
 
 ---
 
 ## Observation
 
-A feasibility study helps in understanding whether a software project is practical before starting its actual development. In the case of the ATM System, the problem, required features, and available resources are clearly identified, and the proposed solution appears practical.
+Clearly defining the problem, objectives, scope, and feasibility for the Weather-Based Crop Advisory System provides a strong foundation for subsequent software design activities such as requirements specification, system design, and cloud architecture planning.
 
 ---
 
 ## Result
 
-The **problem statement, objectives, scope, technical feasibility, and operational feasibility** of the ATM System were successfully identified and analyzed.
-
-The study concludes that the proposed ATM System is **feasible, practical, and suitable for development**.
+The problem statement, objectives, project scope, and technical and operational feasibility analysis for the Weather-Based Crop Advisory System were successfully prepared.
