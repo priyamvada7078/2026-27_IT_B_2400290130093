@@ -1,0 +1,84 @@
+@startuml
+skinparam classAttributeIconSize 0
+class Farmer {
+  +farmerId: String
+  +name: String
+  +mobileNumber: String
+  +cropType: String
+  +farmLocation: String
+  +smsEnabled: Boolean
+  +updateProfile()
+  +updateSmsPreference()
+}
+class Admin {
+  +adminId: String
+  +name: String
+  +manageFarmerAccount()
+  +configureAdvisoryRule()
+  +viewSystemHealth()
+}
+class WeatherRecord {
+  +weatherId: String
+  +locationKey: String
+  +observedAt: DateTime
+  +temperatureC: Float
+  +windSpeedKmh: Float
+  +rainfallForecast: Float
+  +validateFreshness()
+}
+class Advisory {
+  +advisoryId: String
+  +farmerId: String
+  +type: String
+  +message: String
+  +severity: String
+  +generatedAt: DateTime
+  +delivered: Boolean
+  +markForDelivery()
+}
+class AdvisoryRule {
+  +ruleId: String
+  +cropType: String
+  +advisoryType: String
+  +threshold: Float
+  +condition: String
+  +enabled: Boolean
+  +evaluate()
+}
+class AlertRecord {
+  +alertId: String
+  +advisoryId: String
+  +deliveryStatus: String
+  +attemptedAt: DateTime
+  +providerMessageId: String
+  +recordDeliveryStatus()
+}
+class WeatherIngestionService {
+  +fetchWeather()
+  +validateWeather()
+  +storeWeather()
+}
+class AdvisoryEngine {
+  +generateAdvisories()
+  +evaluateRules()
+  +storeAdvisories()
+}
+class AlertService {
+  +formatSms()
+  +sendSms()
+  +logDelivery()
+}
+Farmer "1" --> "0..*" Advisory : receives
+Farmer "1" --> "0..*" AlertRecord : delivery history
+WeatherRecord "1..*" --> "0..*" Advisory : informs
+AdvisoryRule "1..*" --> "0..*" Advisory : determines
+Advisory "1" --> "0..*" AlertRecord : attempts
+WeatherIngestionService ..> WeatherRecord : creates
+AdvisoryEngine ..> WeatherRecord : reads
+AdvisoryEngine ..> AdvisoryRule : evaluates
+AdvisoryEngine ..> Advisory : creates
+AlertService ..> Advisory : processes
+AlertService ..> AlertRecord : records
+Admin ..> Farmer : manages
+Admin ..> AdvisoryRule : configures
+@enduml
