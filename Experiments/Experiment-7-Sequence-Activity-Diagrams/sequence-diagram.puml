@@ -1,0 +1,32 @@
+@startuml
+actor Farmer
+participant "AWS EventBridge" as EB
+participant "Weather Ingestion Lambda" as WI
+participant "External Weather API" as API
+database "DynamoDB" as DB
+participant "Advisory Engine Lambda" as AE
+participant "Alert Service Lambda" as AS
+participant "AWS SNS" as SNS
+
+EB -> WI: Trigger hourly ingestion
+WI -> API: Fetch current + 24-hour forecast
+API --> WI: Weather response
+WI -> WI: Validate response and timestamp
+WI -> DB: Store weather record
+WI -> AE: Trigger advisory generation
+AE -> DB: Read recent weather, profiles, rules
+DB --> AE: Required records
+AE -> AE: Evaluate crop-specific rules
+AE -> DB: Store advisories and flag warnings
+alt Warning exists and SMS enabled
+  AE -> AS: Process alert
+  AS -> DB: Read farmer contact/preferences
+  DB --> AS: Contact and preferences
+  AS -> SNS: Publish SMS
+  SNS --> AS: Result / message ID
+  AS -> DB: Record delivery status
+  SNS --> Farmer: SMS alert
+else No warning or SMS disabled
+  AE -> DB: Keep advisory without SMS
+end
+@enduml

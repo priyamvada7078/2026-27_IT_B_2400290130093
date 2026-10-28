@@ -1,0 +1,34 @@
+@startuml
+start
+:EventBridge scheduled trigger;
+:Fetch weather data;
+if (API request successful?) then (No)
+  :Retry up to 3 times;
+  if (Retry succeeded?) then (No)
+    :Log error and notify admin;
+    stop
+  else (Yes)
+    :Validate timestamp and data;
+  endif
+else (Yes)
+  :Validate timestamp and data;
+endif
+if (Data recent and valid?) then (No)
+  :Do not generate advice from stale data;
+  :Log issue / notify admin;
+  stop
+else (Yes)
+  :Store weather data in DynamoDB;
+  :Read farmer profiles and enabled rules;
+  :Evaluate crop-specific rules;
+  :Store advisories;
+  if (Warning required and SMS enabled?) then (Yes)
+    :Format SMS;
+    :Send via AWS SNS;
+    :Record delivery status;
+  else (No)
+    :Skip SMS delivery;
+  endif
+endif
+stop
+@enduml
