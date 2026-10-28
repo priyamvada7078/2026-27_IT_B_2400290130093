@@ -1,0 +1,53 @@
+@startuml
+top to bottom direction
+skinparam componentStyle rectangle
+
+package "Presentation Layer" {
+  [Farmer Web Dashboard] as FarmerUI
+  [Admin Panel] as AdminUI
+  [SMS on Farmer Phone] as SMSUI
+}
+package "API / Access Layer" {
+  [S3 + CloudFront] as CDN
+  [API Gateway] as APIGW
+  [AWS Cognito] as Cognito
+}
+package "Business Logic Layer — Lambda" {
+  [Farmer Service] as FarmerSvc
+  [Weather Service] as WeatherSvc
+  [Advisory Engine] as Engine
+  [Alert Service] as AlertSvc
+  [Admin Operations] as AdminSvc
+}
+package "Data / Observability Layer" {
+  database "DynamoDB" as DB
+  [CloudWatch Logs] as CW
+}
+cloud "OpenWeatherMap API" as WeatherAPI
+[Amazon EventBridge] as EB
+[Amazon SNS] as SNS
+
+FarmerUI --> CDN
+AdminUI --> CDN
+FarmerUI --> APIGW
+AdminUI --> APIGW
+APIGW --> Cognito : authenticate / authorize
+APIGW --> FarmerSvc
+APIGW --> AdminSvc
+EB --> WeatherSvc : scheduled trigger
+WeatherSvc --> WeatherAPI : HTTPS REST
+WeatherSvc --> DB
+WeatherSvc --> Engine
+FarmerSvc --> DB
+Engine --> DB
+Engine --> AlertSvc
+AlertSvc --> SNS
+AlertSvc --> DB
+AdminSvc --> DB
+FarmerSvc --> CW
+WeatherSvc --> CW
+Engine --> CW
+AlertSvc --> CW
+AdminSvc --> CW
+SNS --> SMSUI : SMS
+@enduml
