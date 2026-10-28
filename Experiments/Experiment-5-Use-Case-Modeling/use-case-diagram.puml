@@ -1,0 +1,40 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+actor Farmer
+actor "Progressive Farmer" as PF
+actor "AgriTech Admin" as Admin
+actor "External Weather API" as WeatherAPI
+actor "AWS Cognito" as Cognito
+actor "AWS SNS" as SNS
+
+rectangle "Weather-Based Crop Advisory System" {
+  usecase "Register / Log In" as UC1
+  usecase "Manage Farmer Profile" as UC2
+  usecase "View Weather Summary" as UC3
+  usecase "View Crop Advisories" as UC4
+  usecase "Manage SMS Preferences" as UC5
+  usecase "Ingest Weather Data" as UC6
+  usecase "Generate Crop Advisories" as UC7
+  usecase "Deliver SMS Alert" as UC8
+  usecase "Manage Farmer Accounts" as UC9
+  usecase "Configure Advisory Rules" as UC10
+  usecase "Monitor System and Logs" as UC11
+}
+Farmer -- UC1
+Farmer -- UC2
+Farmer -- UC4
+Farmer -- UC5
+PF -- UC1
+PF -- UC2
+PF -- UC3
+PF -- UC4
+Admin -- UC9
+Admin -- UC10
+Admin -- UC11
+WeatherAPI -- UC6
+Cognito -- UC1
+SNS -- UC8
+UC6 ..> UC7 : <<triggers>>
+UC7 ..> UC8 : <<triggers when needed>>
+@enduml
